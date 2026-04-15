@@ -4,6 +4,7 @@ import com.example.demo.model.Book;
 import com.example.demo.repository.BookRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +35,13 @@ public class BookController {
 
     @PostMapping
     @Operation(summary = "Añadir un nuevo libro")
-    public Book create(@RequestBody Book book) {
+    public Book create(@Valid @RequestBody Book book) {
         return repository.save(book);
     }
 
     @PutMapping("/{id}")
     @Operation(summary = "Actualizar un libro existente")
-    public ResponseEntity<Book> update(@PathVariable Long id, @RequestBody Book bookDetails) {
+    public ResponseEntity<Book> update(@PathVariable Long id,@Valid @RequestBody Book bookDetails) {
         return repository.findById(id).map(book -> {
             book.setTitle(bookDetails.getTitle());
             book.setAuthor(bookDetails.getAuthor());
