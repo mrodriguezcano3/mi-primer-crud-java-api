@@ -4,26 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity // Le dice a Spring que esta clase es una tabla de base de datos
 @Data   // Genera automáticamente Getters, Setters y otros métodos útiles (de Lombok)
-public class Book {
+public class User {
 
     @Id // Define que este campo es la "Llave Primaria" (el ID único)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String title;
+    @Size (min = 2, max = 20, message = "El nombre debe tener entre 2 y 20 caracteres")
+    private String nombre;
 
-    @NotBlank
-    @Size (min = 3, max = 50, message = "El autor debe tener entre 3 y 50 caracteres")
-    private String author;
-
-    @NotBlank
-    private String isbn;
-    private boolean read;
+    @Email(message = "Debe ser un correo electrónico válido")
+    @NotBlank(message = "El mail es obligatorio")
+    private String mail;
 }
