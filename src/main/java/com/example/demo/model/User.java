@@ -11,12 +11,7 @@ import lombok.Data;
 
 @Entity // Le dice a Spring que esta clase es una tabla de base de datos
 @Data   // Genera automáticamente Getters, Setters y otros métodos útiles (de Lombok)
-public class User {
-
-    @Id // Define que este campo es la "Llave Primaria" (el ID único)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class User extends BaseEntity{
     @NotBlank
     @Size (min = 2, max = 20, message = "El nombre debe tener entre 2 y 20 caracteres")
     private String nombre;
