@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,4 +16,8 @@ public class User extends BaseEntity{
     @Email(message = "Debe ser un correo electrónico válido")
     @NotBlank(message = "El mail es obligatorio")
     private String mail;
+
+    @NotBlank
+    @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
+    private String password;
 }
